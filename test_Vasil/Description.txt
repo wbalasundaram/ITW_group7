@@ -1,0 +1,8 @@
+1) I used JUnit to write unit tests which test the following packages:
+	* hibernateManagers
+	* RESTservices
+	* staticResources
+	* XMLParse
+ During these tests I found 1 unwanted exception being thrown from the XMLParser.unwrapXML() method with specified certain XML input.
+
+2) I used Selenium with JUnint and Firefox driver to produce an automated system test for the login, used to access uclAdmin.jsp. It is in the package SeleniumTests.
