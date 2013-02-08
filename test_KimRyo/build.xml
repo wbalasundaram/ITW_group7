@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="EUC-JP"?>
+<project name="example" default="all" basedir="./">
+
+<property name="build.dir" location="logs"/>
+
+<target name="batchtest">
+	<junit printsummary="yes" haltonfailure="yes">
+		<classpath>
+			<pathelement path="build/classes">
+			</pathelement>
+			<fileset dir="lib">
+				<include name="**/*.jar" />
+			</fileset>
+    	</classpath>
+		<formatter type="plain"/>
+		<test name="test.FirstTest" haltonfailure="yes" outfile="result">
+			<formatter type="xml"/>
+		</test>
+		<batchtest fork="no" todir="report">
+			<fileset dir="src/test">
+				<include name="**/*Test.java"/>
+			</fileset>
+		</batchtest>
+	</junit>
+</target>
+
+<target name="test_req">
+	<junit haltonfailure="yes">
+		<test name="test.RequestTabTest" />
+		<formatter type="plain" usefile="false" />
+		<classpath>
+			<pathelement path="build/classes">
+			</pathelement>
+			<fileset dir="lib">
+				<include name="**/*.jar" />
+			</fileset>
+    	</classpath>
+	</junit>
+</target>
+
+<target name="test_mng_acc">
+	<junit haltonfailure="yes">
+		<test name="test.ManageAccountsTabTest" />
+		<formatter type="plain" usefile="false" />
+		<classpath>
+			<pathelement path="build/classes">
+			</pathelement>
+			<fileset dir="lib">
+				<include name="**/*.jar" />
+			</fileset>
+    	</classpath>
+	</junit>
+</target>
+
+<target name="test_uclAdmin">
+    <antcall target="test_req"/>
+    <antcall target="test_mng_acc"/>
+</target>
+
+<target name="test_mng_app">
+	<junit haltonfailure="yes">
+		<test name="test.ManageApplicationTabTest" />
+		<formatter type="plain" usefile="false" />
+		<classpath>
+			<pathelement path="build/classes">
+			</pathelement>
+			<fileset dir="lib">
+				<include name="**/*.jar" />
+			</fileset>
+    	</classpath>
+	</junit>
+</target>
+
+<target name="test_mng_app_form">
+	<junit haltonfailure="yes">
+		<test name="test.ManageApplicationTabFormCreationTest" />
+		<formatter type="plain" usefile="false" />
+		<classpath>
+			<pathelement path="build/classes">
+			</pathelement>
+			<fileset dir="lib">
+				<include name="**/*.jar" />
+			</fileset>
+    	</classpath>
+	</junit>
+</target>
+
+<target name="test_mng_app_no_name_form">
+	<junit haltonfailure="yes">
+		<test name="test.ManageApplicationTabNoNameFormCreationTest" />
+		<formatter type="plain" usefile="false" />
+		<classpath>
+			<pathelement path="build/classes">
+			</pathelement>
+			<fileset dir="lib">
+				<include name="**/*.jar" />
+			</fileset>
+    	</classpath>
+	</junit>
+</target>
+
+<target name="test_charityAdmin">
+    <!--<antcall target="test_mng_app"/>-->
+    <antcall target="test_mng_app_form"/>
+    <antcall target="test_mng_app_no_name_form"/>
+</target>
+
+<!-- default -->
+<target name="all">
+	<echo message="Project build start."/>
+    <antcall target="test_uclAdmin"/>
+    <antcall target="test_charityAdmin"/>
+</target>
+
+</project>
